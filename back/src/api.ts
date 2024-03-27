@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 
 const app = express.Router();
 
@@ -9,4 +9,4 @@ app.get("/articles", (req, res) => {
   ]);
 });
 
-module.exports = app;
+export default app;
