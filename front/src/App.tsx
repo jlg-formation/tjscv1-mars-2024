@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <>
-      <p className="border-2">Coucou</p>
+      <p className="border-2 flex flex-col">Coucou</p>
     </>
   );
 }
