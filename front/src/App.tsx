@@ -1,9 +1,9 @@
-import './App.css';
+import HeaderLayout from './layout/HeaderLayout';
 
 function App() {
   return (
     <>
-      <p className="border-2 flex flex-col">Coucou</p>
+      <HeaderLayout />
     </>
   );
 }
