@@ -1,8 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
-import HomeView from './views/HomeView';
-import LegalView from './views/LegalView';
 import App from './App';
 import { stockRoutes } from './stock/stockRouter';
+import HomeView from './views/HomeView';
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +14,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'legal',
-        element: <LegalView />,
+        lazy: () =>
+          import('./views/LegalView').then((m) => ({ Component: m.default })),
       },
       ...stockRoutes,
     ],
