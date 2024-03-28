@@ -1,4 +1,5 @@
 import {
+  faCircleNotch,
   faPlus,
   faRotateRight,
   faTrashAlt,
@@ -45,15 +46,26 @@ function ListView() {
             </tr>
           </thead>
           <tbody>
-            {articleStore.articles.map((a) => {
-              return (
-                <tr key={a.id}>
-                  <td className="name">{a.name}</td>
-                  <td className="price number">{a.price} €</td>
-                  <td className="qty number">{a.qty}</td>
-                </tr>
-              );
-            })}
+            {articleStore.articles === undefined ? (
+              <tr>
+                <td colSpan={3}>
+                  <div className="flex items-center justify-center gap-2">
+                    <FontAwesomeIcon icon={faCircleNotch} spin={true} />
+                    <span>Chargement...</span>
+                  </div>
+                </td>
+              </tr>
+            ) : (
+              articleStore.articles.map((a) => {
+                return (
+                  <tr key={a.id}>
+                    <td className="name">{a.name}</td>
+                    <td className="price number">{a.price} €</td>
+                    <td className="qty number">{a.qty}</td>
+                  </tr>
+                );
+              })
+            )}
           </tbody>
         </table>
       </div>

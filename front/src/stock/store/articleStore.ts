@@ -2,14 +2,14 @@ import { create } from 'zustand';
 import { Article, NewArticle } from '../interfaces/Article';
 
 export interface ArticleStore {
-  articles: Article[];
+  articles: Article[] | undefined;
   refresh: () => void;
   add: (newArticle: NewArticle) => void;
   remove: (ids: string[]) => void;
 }
 
 export const useArticleStore = create<ArticleStore>((set) => {
-  const articles: Article[] = [];
+  const articles: Article[] | undefined = undefined;
 
   const refresh = () => {
     set({
@@ -23,16 +23,11 @@ export const useArticleStore = create<ArticleStore>((set) => {
   const add = (newArticle: NewArticle) => {
     console.log('adding newArticle: ', newArticle);
     const article = { ...newArticle, id: window.crypto.randomUUID() };
-    set((state: { articles: Article[] }) => ({
-      articles: [...state.articles, article],
-    }));
+    console.log('article: ', article);
   };
 
   const remove = (ids: string[]) => {
     console.log('remove articles with ids: ', ids);
-    set((state: { articles: Article[] }) => ({
-      articles: state.articles.filter((a) => ids.includes(a.id)),
-    }));
   };
 
   return {
