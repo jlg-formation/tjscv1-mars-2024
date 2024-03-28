@@ -1,12 +1,18 @@
-import { Link } from 'react-router-dom';
-import Main from '../../widgets/Main';
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faRotateRight,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Main from '../../widgets/Main';
+import { Article } from '../interfaces/Article';
+
+const articles: Article[] = [
+  { id: 'a1', name: 'Tournevis', price: 2.34, qty: 123 },
+  { id: 'a2', name: 'Pelle', price: 3.56, qty: 67 },
+];
 
 function ListView() {
   const [errorMsg, setErrorMsg] = useState('');
@@ -40,26 +46,15 @@ function ListView() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="name">Tournevis</td>
-              <td className="price number">2.66 €</td>
-              <td className="qty number">345</td>
-            </tr>
-            <tr>
-              <td className="name">Pelle</td>
-              <td className="price number">12.66 €</td>
-              <td className="qty number">1345</td>
-            </tr>
-            <tr>
-              <td className="name">Pioche</td>
-              <td className="price number">32.00 €</td>
-              <td className="qty number">345</td>
-            </tr>
-            <tr>
-              <td className="name">Marteau</td>
-              <td className="price number">2.66 €</td>
-              <td className="qty number">12</td>
-            </tr>
+            {articles.map((a) => {
+              return (
+                <tr key={a.id}>
+                  <td className="name">{a.name}</td>
+                  <td className="price number">{a.price} €</td>
+                  <td className="qty number">{a.qty}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
