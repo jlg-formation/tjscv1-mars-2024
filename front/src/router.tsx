@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import { stockRoutes } from './stock/stockRouter';
+import { stockRoute } from './stock/stockRouter';
 import HomeView from './views/HomeView';
 
 export const router = createBrowserRouter([
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
         lazy: () =>
           import('./views/LegalView').then((m) => ({ Component: m.default })),
       },
-      ...stockRoutes,
+      stockRoute,
     ],
   },
 ]);
