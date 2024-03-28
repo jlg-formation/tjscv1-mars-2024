@@ -1,6 +1,6 @@
 import { create } from 'zustand';
+import { api } from '../api';
 import { Article, NewArticle } from '../interfaces/Article';
-import { sleep } from '../../utils';
 
 export interface ArticleStore {
   articles: Article[] | undefined;
@@ -13,12 +13,8 @@ export const useArticleStore = create<ArticleStore>((set) => {
   const articles: Article[] | undefined = undefined;
 
   const refresh = async () => {
-    await sleep(1000);
     set({
-      articles: [
-        { id: 'a1', name: 'Tournevis', price: 2.34, qty: 123 },
-        { id: 'a2', name: 'Pelle', price: 3.56, qty: 67 },
-      ],
+      articles: await api.getArticles(),
     });
   };
 
