@@ -26,8 +26,17 @@
 
     tbody {
       @apply cursor-pointer;
+
       tr:nth-child(even) {
         @apply bg-gray-100;
+      }
+
+      tr {
+        @apply hover:bg-gray-200;
+      }
+
+      tr.selected {
+        @apply hover:bg-gray-300;
       }
 
       .number {
