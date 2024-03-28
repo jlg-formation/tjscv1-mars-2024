@@ -1,0 +1,38 @@
+@layer base {
+  h1 {
+    @apply my-6 text-3xl font-bold;
+  }
+
+  p {
+    @apply my-2 w-full;
+  }
+
+  table {
+    @apply border-separate
+      border-spacing-0
+      overflow-hidden
+      rounded-md
+      border-2
+      border-gray-400;
+
+    thead {
+      @apply bg-gray-400;
+    }
+
+    th,
+    td {
+      @apply px-4 py-2;
+    }
+
+    tbody {
+      @apply cursor-pointer;
+      tr:nth-child(even) {
+        @apply bg-gray-100;
+      }
+
+      .number {
+        @apply text-right;
+      }
+    }
+  }
+}
