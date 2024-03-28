@@ -16,9 +16,10 @@ function ListView() {
 
   console.log('rendering ListView');
 
-  const handleRefresh = () => {
+  const handleRefresh = async () => {
     setErrorMsg('coucou');
-    articleStore.refresh();
+    await articleStore.refresh();
+    console.log('refreshed finished');
   };
 
   return (
