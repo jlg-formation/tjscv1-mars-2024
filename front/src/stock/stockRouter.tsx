@@ -1,14 +1,14 @@
 import { RouteObject } from 'react-router-dom';
-import ListView from './views/ListView';
-import AddView from './views/AddView';
 
 export const stockRoutes: RouteObject[] = [
   {
     path: 'stock',
-    element: <ListView />,
+    lazy: () =>
+      import('./views/ListView').then((m) => ({ Component: m.default })),
   },
   {
     path: 'stock/add',
-    element: <AddView />,
+    lazy: () =>
+      import('./views/AddView').then((m) => ({ Component: m.default })),
   },
 ];
