@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function AddView() {
   return (
@@ -31,7 +33,10 @@ function AddView() {
           <LabelError message={'Champ requis'} />
         </label>
         <div className="error h-24"></div>
-        <button className="btn btn-primary">Ajouter</button>
+        <button className="btn btn-primary">
+          <FontAwesomeIcon icon={faPlus} />
+          <span>Ajouter</span>
+        </button>
       </form>
     </Main>
   );

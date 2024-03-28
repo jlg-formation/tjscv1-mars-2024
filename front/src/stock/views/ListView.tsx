@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import Main from '../../widgets/Main';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPlus,
+  faRotateRight,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
 function ListView() {
   const [errorMsg, setErrorMsg] = useState('');
@@ -14,13 +20,15 @@ function ListView() {
       <h1>Liste des articles</h1>
       <div>
         <nav className="flex gap-1">
-          <button className="btn" onClick={handleRefresh}>
-            Refresh
+          <button className="btn" onClick={handleRefresh} title="Rafraîchir">
+            <FontAwesomeIcon icon={faRotateRight} />
           </button>
-          <Link to="add" className="btn">
-            Ajouter
+          <Link to="add" className="btn" title="Ajouter">
+            <FontAwesomeIcon icon={faPlus} />
           </Link>
-          <button className="btn">Supprimer</button>
+          <button className="btn" title="Supprimer">
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </button>
         </nav>
         <div className="error h-8 font-bold">{errorMsg}</div>
         <table>
