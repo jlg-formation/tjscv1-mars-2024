@@ -7,24 +7,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Main from '../../widgets/Main';
-import { Article } from '../interfaces/Article';
+import { useArticleStore } from '../store/articleStore';
 
 function ListView() {
   const [errorMsg, setErrorMsg] = useState('');
-  const [articles, setarticles] = useState<Article[]>([
-    { id: 'a1', name: 'Tournevis', price: 2.34, qty: 123 },
-    { id: 'a2', name: 'Pelle', price: 3.56, qty: 67 },
-  ]);
+  const articleStore = useArticleStore();
 
   console.log('rendering ListView');
 
   const handleRefresh = () => {
     setErrorMsg('coucou');
-
-    setarticles([
-      ...articles,
-      { id: window.crypto.randomUUID(), name: 'Pioche', price: 2.34, qty: 123 },
-    ]);
+    articleStore.refresh();
   };
 
   return (
@@ -52,7 +45,7 @@ function ListView() {
             </tr>
           </thead>
           <tbody>
-            {articles.map((a) => {
+            {articleStore.articles.map((a) => {
               return (
                 <tr key={a.id}>
                   <td className="name">{a.name}</td>
