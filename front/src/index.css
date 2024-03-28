@@ -7,13 +7,15 @@
 @layer components {
   .btn {
     @apply flex items-center justify-center gap-2
-    rounded-md  bg-gray-200 px-4 py-2
-    hover:bg-gray-300 active:bg-gray-400
+    rounded-md  border-2 border-gray-200 bg-gray-200
+    px-4 py-2
+    hover:border-gray-300 hover:bg-gray-300 active:border-gray-400 active:bg-gray-400
     disabled:text-gray-400;
   }
 
   .btn-primary {
-    @apply bg-gray-800 text-gray-100
-     hover:bg-gray-700 active:bg-gray-600 disabled:bg-gray-200;
+    @apply border-gray-800 bg-gray-800 text-gray-100
+     hover:border-gray-700 hover:bg-gray-700 active:border-gray-600 active:bg-gray-600
+     disabled:bg-gray-200;
   }
 }

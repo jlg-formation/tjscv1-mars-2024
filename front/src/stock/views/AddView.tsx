@@ -1,27 +1,37 @@
+import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 
 function AddView() {
   return (
     <Main>
       <h1>Ajouter un article</h1>
-      <form>
-        <label>
+      <form className="flex w-full max-w-sm flex-col">
+        <label className="flex flex-col">
           <span>Nom</span>
-          <input type="text" />
-          <span className="error"></span>
+          <input
+            type="text"
+            className="rounded-md border-2 border-gray-300 px-4 py-2"
+          />
+          <LabelError message={'Champ requis'} />
         </label>
-        <label>
+        <label className="flex flex-col">
           <span>Prix</span>
-          <input type="number" />
-          <span className="error"></span>
+          <input
+            type="number"
+            className="rounded-md border-2 border-gray-300 px-4 py-2"
+          />
+          <LabelError message={'Champ requis'} />
         </label>
-        <label>
+        <label className="flex flex-col">
           <span>Quantité</span>
-          <input type="number" />
-          <span className="error"></span>
+          <input
+            type="number"
+            className="rounded-md border-2 border-gray-300 px-4 py-2 "
+          />
+          <LabelError message={'Champ requis'} />
         </label>
-        <div className="error"></div>
-        <button>Ajouter</button>
+        <div className="error h-24"></div>
+        <button className="btn btn-primary">Ajouter</button>
       </form>
     </Main>
   );
