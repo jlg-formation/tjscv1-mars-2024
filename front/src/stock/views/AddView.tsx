@@ -1,12 +1,11 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { sleep } from '../../utils';
 import FormAsyncBtn from '../../widgets/FormAsyncBtn';
 import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
-import { sleep } from '../../utils';
 
 function AddView() {
   const [name, setName] = useState('Truc');
