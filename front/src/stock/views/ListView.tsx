@@ -44,6 +44,12 @@ function ListView() {
     setSelectedArticles(new Set(selectedArticles));
   };
 
+  const handleRemove = async () => {
+    const ids = [...selectedArticles];
+    await articleStore.remove(ids);
+    setSelectedArticles(new Set());
+  };
+
   return (
     <Main>
       <h1>Liste des articles</h1>
@@ -59,6 +65,7 @@ function ListView() {
             className="btn"
             title="Supprimer"
             hidden={selectedArticles.size === 0}
+            onClick={handleRemove}
           >
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>

@@ -28,6 +28,8 @@ export const useArticleStore = create<ArticleStore>((set) => {
 
   const remove = async (ids: string[]) => {
     console.log('remove articles with ids: ', ids);
+    await api.remove(ids);
+    await refresh();
   };
 
   return {

@@ -24,6 +24,19 @@ class API {
     const articles: Article[] = await response.json();
     return articles;
   }
+
+  async remove(ids: string[]) {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(ids),
+    });
+    if (response.status >= 400) {
+      throw new Error('Erreur Technique');
+    }
+  }
 }
 
 export const api = new API();

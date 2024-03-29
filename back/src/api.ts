@@ -4,7 +4,7 @@ import { randomUUID } from "node:crypto";
 
 const app = express.Router();
 
-const articles: Article[] = [
+let articles: Article[] = [
   { id: "a1", name: "Tournevis", price: 2.34, qty: 123 },
   { id: "a2", name: "Pelle", price: 3.56, qty: 67 },
 ];
@@ -12,6 +12,7 @@ const articles: Article[] = [
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*");
   next();
 });
 
@@ -24,6 +25,12 @@ app.post("/articles", json(), (req, res) => {
   const article = { ...newArticle, id: randomUUID() };
   articles.push(article);
   res.status(201).end();
+});
+
+app.delete("/articles", json(), (req, res) => {
+  const ids = req.body;
+  articles = articles.filter((a) => !ids.includes(a.id));
+  res.status(204).end();
 });
 
 export default app;
