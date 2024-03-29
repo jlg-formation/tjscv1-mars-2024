@@ -20,6 +20,6 @@
   .btn-primary {
     @apply border-gray-800 bg-gray-800 text-gray-100
      hover:border-gray-700 hover:bg-gray-700 active:border-gray-600 active:bg-gray-600
-     disabled:bg-gray-200;
+     disabled:border-gray-200 disabled:bg-gray-200;
   }
 }

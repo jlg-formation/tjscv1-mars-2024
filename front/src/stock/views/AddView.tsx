@@ -6,11 +6,14 @@ import FormAsyncBtn from '../../widgets/FormAsyncBtn';
 import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
+import { sleep } from '../../utils';
 
 function AddView() {
   const [name, setName] = useState('Truc');
   const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(0);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -19,8 +22,11 @@ function AddView() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log('e: ', e);
     e.preventDefault();
+    setIsSubmitting(true);
+    await sleep(2000);
     await articleStore.add({ name, price, qty });
     navigate('..');
+    setIsSubmitting(false);
   };
 
   return (
@@ -58,11 +64,11 @@ function AddView() {
           <LabelError message={'Champ requis'} />
         </label>
         <div className="error h-24"></div>
-        <button className="btn btn-primary">
-          <FontAwesomeIcon icon={faPlus} />
-          <span>Ajouter</span>
-        </button>
-        <FormAsyncBtn />
+        <FormAsyncBtn
+          label="Ajouter"
+          icon={faPlus}
+          isSubmitting={isSubmitting}
+        />
       </form>
       {name}
     </Main>
