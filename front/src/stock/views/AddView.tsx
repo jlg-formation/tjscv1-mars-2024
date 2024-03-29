@@ -43,7 +43,7 @@ function AddView() {
     try {
       setErrorMsg('');
       setIsSubmitting(true);
-      await sleep(2000);
+      await sleep(300);
       await articleStore.add({ name, price, qty });
       navigate('..');
     } catch (err) {

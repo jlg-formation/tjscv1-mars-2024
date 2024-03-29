@@ -31,7 +31,7 @@ function ListView() {
   }, [articleStore]);
 
   const handleRefresh = async () => {
-    await sleep(2000);
+    await sleep(300);
     await articleStore.refresh();
     console.log('refreshed finished');
   };
@@ -47,7 +47,7 @@ function ListView() {
   };
 
   const handleRemove = async () => {
-    await sleep(2000);
+    await sleep(300);
     const ids = [...selectedArticles];
     await articleStore.remove(ids);
     setSelectedArticles(new Set());
