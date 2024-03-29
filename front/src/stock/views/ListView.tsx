@@ -11,6 +11,7 @@ import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
 
 function ListView() {
+  console.log('rendering ListView');
   const [errorMsg, setErrorMsg] = useState('');
   const articleStore = useArticleStore();
 
@@ -21,9 +22,10 @@ function ListView() {
         await articleStore.refresh();
       }
     })();
+    return () => {
+      console.log('retour de useEffect');
+    };
   }, [articleStore]);
-
-  console.log('rendering ListView');
 
   const handleRefresh = async () => {
     setErrorMsg('coucou');
