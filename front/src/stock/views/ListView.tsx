@@ -5,7 +5,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
@@ -13,6 +13,15 @@ import { useArticleStore } from '../store/articleStore';
 function ListView() {
   const [errorMsg, setErrorMsg] = useState('');
   const articleStore = useArticleStore();
+
+  useEffect(() => {
+    (async () => {
+      console.log('start use effect');
+      if (articleStore.articles === undefined) {
+        await articleStore.refresh();
+      }
+    })();
+  }, [articleStore]);
 
   console.log('rendering ListView');
 
