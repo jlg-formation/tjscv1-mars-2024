@@ -6,6 +6,7 @@ import FormAsyncBtn from '../../widgets/FormAsyncBtn';
 import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
+import { validateName } from '../validation';
 
 function AddView() {
   const [name, setName] = useState('Truc');
@@ -14,6 +15,8 @@ function AddView() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+
+  const [errorNameMsg, setErrorNameMsg] = useState('');
 
   const navigate = useNavigate();
 
@@ -46,9 +49,12 @@ function AddView() {
             type="text"
             className="rounded-md border-2 border-gray-300 px-4 py-2"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setErrorNameMsg(validateName(e.target.value));
+            }}
           />
-          <LabelError message={'Champ requis'} />
+          <LabelError message={errorNameMsg} />
         </label>
         <label className="flex flex-col">
           <span>Prix</span>
@@ -58,7 +64,7 @@ function AddView() {
             value={price}
             onChange={(e) => setPrice(+e.target.value)}
           />
-          <LabelError message={'Champ requis'} />
+          <LabelError message={''} />
         </label>
         <label className="flex flex-col">
           <span>Quantité</span>
@@ -68,7 +74,7 @@ function AddView() {
             value={qty}
             onChange={(e) => setQty(+e.target.value)}
           />
-          <LabelError message={'Champ requis'} />
+          <LabelError message={''} />
         </label>
         <div className="error flex h-24 items-center justify-center font-bold">
           {errorMsg}
@@ -77,6 +83,7 @@ function AddView() {
           label="Ajouter"
           icon={faPlus}
           isSubmitting={isSubmitting}
+          disabled={errorNameMsg.length > 0}
         />
       </form>
       {name}
