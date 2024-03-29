@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --write ./src",
-    "dev:host": "vite --host"
+    "e2e:open": "concurrently \"vite --host\" \"cypress open\"",
+    "e2e:run": "concurrently \"vite --host\" \"cypress run\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -27,6 +28,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "cypress": "^13.7.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
