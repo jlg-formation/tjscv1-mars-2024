@@ -14,6 +14,7 @@ function ListView() {
   console.log('rendering ListView');
   const [errorMsg, setErrorMsg] = useState('');
   const articleStore = useArticleStore();
+  const [selectedArticles, setSelectedArticles] = useState(new Set<string>());
 
   useEffect(() => {
     (async () => {
@@ -31,6 +32,16 @@ function ListView() {
     setErrorMsg('coucou');
     await articleStore.refresh();
     console.log('refreshed finished');
+  };
+
+  const handleSelect = (id: string) => () => {
+    if (selectedArticles.has(id)) {
+      selectedArticles.delete(id);
+      setSelectedArticles(new Set(selectedArticles));
+      return;
+    }
+    selectedArticles.add(id);
+    setSelectedArticles(new Set(selectedArticles));
   };
 
   return (
@@ -70,7 +81,11 @@ function ListView() {
             ) : (
               articleStore.articles.map((a) => {
                 return (
-                  <tr key={a.id}>
+                  <tr
+                    key={a.id}
+                    onClick={handleSelect(a.id)}
+                    className={selectedArticles.has(a.id) ? 'selected' : ''}
+                  >
                     <td className="name">{a.name}</td>
                     <td className="price number">{a.price} €</td>
                     <td className="qty number">{a.qty}</td>
