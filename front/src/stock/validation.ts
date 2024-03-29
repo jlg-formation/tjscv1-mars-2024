@@ -10,3 +10,18 @@ export const validateName = (name: string): string => {
   }
   return '';
 };
+
+export const validatePrice = (price: number): string => {
+  if (price < 0) {
+    return 'Le prix doit être positif';
+  }
+  return '';
+};
+
+export const validateQty = (qty: number): string => {
+  if (!Number.isInteger(qty)) {
+    return 'La quantité doit être un entier';
+  }
+
+  return '';
+};

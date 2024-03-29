@@ -44,4 +44,12 @@
       }
     }
   }
+
+  form {
+    label {
+      input.invalid {
+        @apply border-red-300 outline-red-600;
+      }
+    }
+  }
 }

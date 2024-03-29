@@ -6,7 +6,7 @@ import FormAsyncBtn from '../../widgets/FormAsyncBtn';
 import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
-import { validateName } from '../validation';
+import { validateName, validatePrice, validateQty } from '../validation';
 
 function AddView() {
   const [name, setName] = useState('Truc');
@@ -16,7 +16,13 @@ function AddView() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const [errorNameMsg, setErrorNameMsg] = useState('');
+  const [nameErrorMsg, setNameErrorMsg] = useState('');
+  const [priceErrorMsg, setPriceErrorMsg] = useState('');
+  const [qtyErrorMsg, setQtyErrorMsg] = useState('');
+
+  const [nameTouched, setNameTouched] = useState(false);
+  const [priceTouched, setPriceTouched] = useState(false);
+  const [qtyTouched, setQtyTouched] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,34 +53,52 @@ function AddView() {
           <span>Nom</span>
           <input
             type="text"
-            className="rounded-md border-2 border-gray-300 px-4 py-2"
+            className={
+              'rounded-md border-2 border-gray-300 px-4 py-2' +
+              (nameTouched && nameErrorMsg ? ' invalid' : '')
+            }
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              setErrorNameMsg(validateName(e.target.value));
+              setNameErrorMsg(validateName(e.target.value));
             }}
+            onBlur={() => setNameTouched(true)}
           />
-          <LabelError message={errorNameMsg} />
+          <LabelError message={nameTouched ? nameErrorMsg : ''} />
         </label>
         <label className="flex flex-col">
           <span>Prix</span>
           <input
             type="number"
-            className="rounded-md border-2 border-gray-300 px-4 py-2"
+            className={
+              'rounded-md border-2 border-gray-300 px-4 py-2' +
+              (priceTouched && priceErrorMsg ? ' invalid' : '')
+            }
             value={price}
-            onChange={(e) => setPrice(+e.target.value)}
+            onChange={(e) => {
+              setPrice(+e.target.value);
+              setPriceErrorMsg(validatePrice(+e.target.value));
+            }}
+            onBlur={() => setPriceTouched(true)}
           />
-          <LabelError message={''} />
+          <LabelError message={priceTouched ? priceErrorMsg : ''} />
         </label>
         <label className="flex flex-col">
           <span>Quantité</span>
           <input
             type="number"
-            className="rounded-md border-2 border-gray-300 px-4 py-2 "
+            className={
+              'rounded-md border-2 border-gray-300 px-4 py-2' +
+              (qtyTouched && qtyErrorMsg ? ' invalid' : '')
+            }
             value={qty}
-            onChange={(e) => setQty(+e.target.value)}
+            onChange={(e) => {
+              setQty(+e.target.value);
+              setQtyErrorMsg(validateQty(+e.target.value));
+            }}
+            onBlur={() => setQtyTouched(true)}
           />
-          <LabelError message={''} />
+          <LabelError message={qtyTouched ? qtyErrorMsg : ''} />
         </label>
         <div className="error flex h-24 items-center justify-center font-bold">
           {errorMsg}
@@ -83,10 +107,9 @@ function AddView() {
           label="Ajouter"
           icon={faPlus}
           isSubmitting={isSubmitting}
-          disabled={errorNameMsg.length > 0}
+          disabled={(nameErrorMsg + priceErrorMsg + qtyErrorMsg).length > 0}
         />
       </form>
-      {name}
     </Main>
   );
 }
