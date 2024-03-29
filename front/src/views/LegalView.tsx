@@ -1,9 +1,10 @@
 import Main from '../widgets/Main';
+import Title from '../widgets/Title';
 
 function LegalView() {
   return (
     <Main>
-      <h1>Mentions Légales</h1>
+      <Title>Mentions Légales</Title>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum voluptates
         nam, autem accusantium odio rerum vero quaerat sed similique, quia

@@ -2,7 +2,6 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import { stockRoute } from './stock/stockRouter';
 import HomeView from './views/HomeView';
-import NotFoundView from './views/NotFoundView';
 
 export const router = createBrowserRouter([
   {

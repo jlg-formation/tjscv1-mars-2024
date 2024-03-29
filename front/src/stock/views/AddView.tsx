@@ -7,6 +7,7 @@ import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
 import { validateName, validatePrice, validateQty } from '../validation';
+import Title from '../../widgets/Title';
 
 function AddView() {
   const [name, setName] = useState('Truc');
@@ -56,7 +57,7 @@ function AddView() {
 
   return (
     <Main>
-      <h1>Ajouter un article</h1>
+      <Title>Ajouter un article</Title>
       <form className="flex w-full max-w-sm flex-col" onSubmit={handleSubmit}>
         <label className="flex flex-col">
           <span>Nom</span>

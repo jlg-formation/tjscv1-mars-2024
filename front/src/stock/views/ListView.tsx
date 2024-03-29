@@ -11,6 +11,7 @@ import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
 import { sleep } from '../../utils';
 import AsynBtn from '../../widgets/AsyncBtn';
+import Title from '../../widgets/Title';
 
 function ListView() {
   console.log('rendering ListView');
@@ -55,7 +56,7 @@ function ListView() {
 
   return (
     <Main>
-      <h1>Liste des articles</h1>
+      <Title>Liste des articles</Title>
       <div>
         <nav className="flex gap-1">
           <AsynBtn
