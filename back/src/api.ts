@@ -22,6 +22,10 @@ app.get("/articles", (req, res) => {
 
 app.post("/articles", json(), (req, res) => {
   const newArticle = req.body;
+  if (newArticle.name === "Zut") {
+    res.status(400).end();
+    return;
+  }
   const article = { ...newArticle, id: randomUUID() };
   articles.push(article);
   res.status(201).end();

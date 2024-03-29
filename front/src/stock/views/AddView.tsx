@@ -14,6 +14,7 @@ function AddView() {
   const [qty, setQty] = useState(0);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const navigate = useNavigate();
 
@@ -22,11 +23,18 @@ function AddView() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log('e: ', e);
     e.preventDefault();
-    setIsSubmitting(true);
-    await sleep(2000);
-    await articleStore.add({ name, price, qty });
-    navigate('..');
-    setIsSubmitting(false);
+    try {
+      setErrorMsg('');
+      setIsSubmitting(true);
+      await sleep(2000);
+      await articleStore.add({ name, price, qty });
+      navigate('..');
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Erreur Technique';
+      setErrorMsg(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -63,7 +71,9 @@ function AddView() {
           />
           <LabelError message={'Champ requis'} />
         </label>
-        <div className="error h-24"></div>
+        <div className="error flex h-24 items-center justify-center font-bold">
+          {errorMsg}
+        </div>
         <FormAsyncBtn
           label="Ajouter"
           icon={faPlus}
