@@ -55,9 +55,11 @@ function ListView() {
           <Link to="add" className="btn" title="Ajouter">
             <FontAwesomeIcon icon={faPlus} />
           </Link>
-          <button className="btn" title="Supprimer">
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </button>
+          {selectedArticles.size > 0 && (
+            <button className="btn" title="Supprimer">
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
+          )}
         </nav>
         <div className="error h-8 font-bold">{errorMsg}</div>
         <table>
