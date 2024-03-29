@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import { stockRoute } from './stock/stockRouter';
 import HomeView from './views/HomeView';
+import NotFoundView from './views/NotFoundView';
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
           import('./views/LegalView').then((m) => ({ Component: m.default })),
       },
       stockRoute,
+      {
+        path: '*',
+        element: <NotFoundView />,
+      },
     ],
   },
 ]);
