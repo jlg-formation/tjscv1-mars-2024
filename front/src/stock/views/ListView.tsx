@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
+import { sleep } from '../../utils';
+import AsynBtn from '../../widgets/AsyncBtn';
 
 function ListView() {
   console.log('rendering ListView');
@@ -29,7 +31,7 @@ function ListView() {
   }, [articleStore]);
 
   const handleRefresh = async () => {
-    setErrorMsg('coucou');
+    await sleep(2000);
     await articleStore.refresh();
     console.log('refreshed finished');
   };
@@ -45,6 +47,7 @@ function ListView() {
   };
 
   const handleRemove = async () => {
+    await sleep(2000);
     const ids = [...selectedArticles];
     await articleStore.remove(ids);
     setSelectedArticles(new Set());
@@ -55,20 +58,22 @@ function ListView() {
       <h1>Liste des articles</h1>
       <div>
         <nav className="flex gap-1">
-          <button className="btn" onClick={handleRefresh} title="Rafraîchir">
-            <FontAwesomeIcon icon={faRotateRight} />
-          </button>
+          <AsynBtn
+            title="Rafraîchir"
+            icon={faRotateRight}
+            onAction={handleRefresh}
+            onError={setErrorMsg}
+          />
           <Link to="add" className="btn" title="Ajouter">
             <FontAwesomeIcon icon={faPlus} />
           </Link>
-          <button
-            className="btn"
+          <AsynBtn
             title="Supprimer"
+            icon={faTrashAlt}
+            onAction={handleRemove}
+            onError={setErrorMsg}
             hidden={selectedArticles.size === 0}
-            onClick={handleRemove}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </button>
+          />
         </nav>
         <div className="error h-8 font-bold">{errorMsg}</div>
         <table>
