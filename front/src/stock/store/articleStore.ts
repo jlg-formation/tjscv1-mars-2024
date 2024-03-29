@@ -22,8 +22,8 @@ export const useArticleStore = create<ArticleStore>((set) => {
 
   const add = async (newArticle: NewArticle) => {
     console.log('adding newArticle: ', newArticle);
-    const article = { ...newArticle, id: window.crypto.randomUUID() };
-    console.log('article: ', article);
+    await api.add(newArticle);
+    await refresh();
   };
 
   const remove = async (ids: string[]) => {
