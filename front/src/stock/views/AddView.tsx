@@ -1,10 +1,11 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import FormAsyncBtn from '../../widgets/FormAsyncBtn';
 import LabelError from '../../widgets/LabelError';
 import Main from '../../widgets/Main';
 import { useArticleStore } from '../store/articleStore';
-import { useNavigate } from 'react-router-dom';
 
 function AddView() {
   const [name, setName] = useState('Truc');
@@ -61,6 +62,7 @@ function AddView() {
           <FontAwesomeIcon icon={faPlus} />
           <span>Ajouter</span>
         </button>
+        <FormAsyncBtn />
       </form>
       {name}
     </Main>
