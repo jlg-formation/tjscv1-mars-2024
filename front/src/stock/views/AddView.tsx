@@ -1,5 +1,5 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sleep } from '../../utils';
 import FormAsyncBtn from '../../widgets/FormAsyncBtn';
@@ -37,6 +37,11 @@ function AddView() {
     }
     nameInput.current.select();
   }, []);
+
+  const isFormValid = useMemo((): boolean => {
+    console.log('isFormValid');
+    return (nameErrorMsg + priceErrorMsg + qtyErrorMsg).length > 0;
+  }, [nameErrorMsg, priceErrorMsg, qtyErrorMsg]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log('e: ', e);
@@ -118,7 +123,7 @@ function AddView() {
           label="Ajouter"
           icon={faPlus}
           isSubmitting={isSubmitting}
-          disabled={(nameErrorMsg + priceErrorMsg + qtyErrorMsg).length > 0}
+          disabled={isFormValid}
         />
       </form>
     </Main>
