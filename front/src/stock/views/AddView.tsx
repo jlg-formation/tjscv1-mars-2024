@@ -1,5 +1,5 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sleep } from '../../utils';
 import FormAsyncBtn from '../../widgets/FormAsyncBtn';
@@ -24,9 +24,18 @@ function AddView() {
   const [priceTouched, setPriceTouched] = useState(false);
   const [qtyTouched, setQtyTouched] = useState(false);
 
+  const nameInput = useRef<HTMLInputElement>(null);
+
   const navigate = useNavigate();
 
   const articleStore = useArticleStore();
+
+  useEffect(() => {
+    if (nameInput.current === null) {
+      return;
+    }
+    nameInput.current.select();
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log('e: ', e);
@@ -52,6 +61,7 @@ function AddView() {
         <label className="flex flex-col">
           <span>Nom</span>
           <input
+            ref={nameInput}
             type="text"
             className={
               'rounded-md border-2 border-gray-300 px-4 py-2' +
